@@ -4,6 +4,9 @@ on:
     branches:
       - main
       - dev
+  pull_request:
+    types:
+      - closed
 
 permissions:
   contents: write
