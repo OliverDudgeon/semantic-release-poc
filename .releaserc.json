@@ -16,6 +16,10 @@
       "assets": ["package.json", "CHANGELOG.md"],
       "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
     }],
-    "@semantic-release/github"
+    "@semantic-release/github",
+    ["semantic-release-github-pr", {
+      "prTitle": "chore(release): ${nextRelease.version}",
+      "prBody": "This PR updates the version to ${nextRelease.version}\n\n${nextRelease.notes}"
+    }]
   ]
 }

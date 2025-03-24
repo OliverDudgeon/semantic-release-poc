@@ -51,7 +51,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Setup PR branch
+        if: github.event_name == 'pull_request'
+        run: git checkout -b ${{ github.head_ref }}
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm release
+          PR_PREVIEW: ${{ github.event_name == 'pull_request' }}
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            unset GITHUB_ACTIONS && pnpm release
+          else
+            pnpm release
+          fi
